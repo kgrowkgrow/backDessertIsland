@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
-  belongs_to :user_id
-  belongs_to :recipe_id
+  has_many :likes
+  has_many :users, through: :likes
+  belongs_to :user
+  belongs_to :recipe
 end
