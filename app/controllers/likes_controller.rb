@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
 
-
+    before_action :authorized, only: [:create, :update]
 
     def create
         like = Like.new(like_params)

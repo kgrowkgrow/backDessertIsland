@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+    before_action :authorized, only: [:create, :update, :destroy]
+
     def index 
         comments = Comment.all
         render json: comments  
@@ -38,6 +40,6 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:user_id, :recipe_id)
+        params.require(:comment).permit(:user_id, :recipe_id, :content)
     end
 end
