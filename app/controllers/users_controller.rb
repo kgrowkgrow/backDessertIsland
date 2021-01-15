@@ -6,9 +6,27 @@ class UsersController < ApplicationController
     end
 
     def create
+        byebug
         user = User.new(user_params)
 
-        # do in auth
+        if user.save
+            token = encode_token({user_id: user.id})
+            render json: {user: user, token: token}
+        else 
+            render json: user.errors
+        end
+
+    end
+
+    def login 
+        byebug
+        user = User.find_by(name: params[:name])
+        #has_secure_password gives us authenticate method
+        if user && user.authenticate(params[:password])
+            render json: user
+        else 
+            render json: {error: "Incorrect Username or Password"}
+        end
     end
 
     def update
@@ -27,14 +45,10 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def login 
-        #save for auth
-    end
-
     private
 
     def user_params 
-        params.require(:user).permit(:id, :password, :name, :diabetic, :carb_ratio)
+        params.permit(:password, :name, :diabetic, :carb_ratio)
     end
 
 
