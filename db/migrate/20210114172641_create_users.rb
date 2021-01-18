@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :password_digest
       t.boolean :diabetic
-      t.integer :carb_ratio
+      t.float :carb_ratio
 
       t.timestamps
     end

@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_01_14_200227) do
     t.string "name"
     t.string "password_digest"
     t.boolean "diabetic"
-    t.integer "carb_ratio"
+    t.float "carb_ratio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
