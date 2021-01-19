@@ -29,15 +29,37 @@ class UsersController < ApplicationController
         end
     end
 
-    def update
-        user = User.find(params[:id])
-        token = encode_token({user_id: user.id})
+    def edit 
+        if current_user
+            user = current_user
+            token = auth_header.split(" ")[1]
+            user.update(user_params)
+            if user.save
+                render_user(user, token) 
+            else
+                render json: user.errors
+            end
+        end
+    end
 
-        user.update(user_params)
-        if user.save
-            render_user(user, token)
-        else 
-            render json: user.errors
+    # def update
+    #     user = User.find(params[:id])
+    #     token = encode_token({user_id: user.id})
+
+    #     user.update(user_params)
+    #     if user.save
+    #         render_user(user, token)
+    #     else 
+    #         render json: user.errors
+    #     end
+    # end
+
+    def delete 
+        if current_user
+            user = current_user
+
+            user.destroy
+            render json: {message: "successfully deleted"}
         end
     end
 
@@ -54,7 +76,7 @@ class UsersController < ApplicationController
     end
 
     def render_user(user, token)
-        render json: {user: {name: user.name}, token: token} #add diabetes stuff
+        render json: {user: {name: user.name, carb_ratio: user.carb_ratio, diabetic: user.diabetic}, token: token} #add diabetes stuff
     end
 
     
