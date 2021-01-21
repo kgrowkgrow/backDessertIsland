@@ -14,13 +14,17 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  
+  # -- user routes -- # 
 
   post 'signup', to: 'users#create'
   post 'login', to: 'users#login'
   patch 'edit', to: 'users#edit'
   delete 'delete', to: 'users#delete'
 
-  #custom routes: ??
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # -- recipe routes -- # 
+  get 'get-recipe/:id', to: 'recipes#get_recipe'
+
+  # -- comment routes -- # 
+  # post 'new-comment', to: 'comments#new_comment'
+
 end
