@@ -45,6 +45,7 @@ class CommentsController < ApplicationController
     end
 
     def render_comment(comment)
-        render json: {comment: {content: comment.content, recipe_id: comment.recipe_id, user_id: comment.user_id}}
+        render json: comment, except: [:created_at, :updated_at]
+        #{content: comment.content, recipe_id: comment.recipe_id, user_id: comment.user_id, id: comment.id}
     end
 end
