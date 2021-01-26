@@ -21,10 +21,9 @@ Rails.application.routes.draw do
   patch 'edit', to: 'users#edit'
   delete 'delete', to: 'users#delete'
 
-  # -- recipe routes -- # 
+  # -- recipe route -- # 
   get 'get-recipe/:id', to: 'recipes#get_recipe'
 
-  # -- comment routes -- # 
-  # post 'new-comment', to: 'comments#new_comment'
-
+  # -- favorites route -- # 
+  get 'get-favorites', to: 'favorites#get_favorites'
 end
