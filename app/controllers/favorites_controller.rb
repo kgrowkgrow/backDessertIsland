@@ -5,12 +5,7 @@ class FavoritesController < ApplicationController
     def index
         favorites = Favorite.all
         render json: favorites
-    end
-
-    def show
-        favorite = Favorite.find(params[:id])
-        render json: favorite
-    end
+    end 
 
     def create
         favorite = Favorite.new(favorite_params)
@@ -21,6 +16,9 @@ class FavoritesController < ApplicationController
         end
     end
 
+    def get_favorites 
+        favorites = Favorite.select {|fav| fav.user === current_user}
+    end
 
     private
 
